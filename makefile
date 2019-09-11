@@ -2,7 +2,7 @@ logParse:	logParse.o
 		gcc -o logParse logParse.o
 
 logParse.o:	logParse.c
-		gcc -g -c dt.c
+		gcc -g -c logParse.c
 
 .PHONY: 	clean
 clean:
