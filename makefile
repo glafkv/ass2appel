@@ -6,4 +6,4 @@ logParse.o:	logParse.c
 
 .PHONY: 	clean
 clean:
-		/bin/rm -f *.o *~ apppel.2
+		/bin/rm -f output.dat *.o *~ apppel.2

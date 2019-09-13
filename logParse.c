@@ -91,8 +91,50 @@ int main(int argc, char **argv)
 
 	//Here we need to go into a loop that does everything else.
 	//Will need to think about this more tomorrow.
+	//Goes into loop based on the first number grabbed.
+	for(i = 0; i < num; i++){
+		//Gets second line of input.
+		fgets(str, 60, ifPtr);
+		pid = fork();
+		//if the fork fails
+		if(pid < 0){
+			perror("logParse.c: Error: ");
+		}
+		else if(pid != 0){  //parent
+			fgets(str, 60, ifPtr);
+			
+			waitpid(pid, &status, 0);
+			if(WIFEXITED(status)){
+				int es = WEXITSTATUS(status);
+				
+				if(es == 255){
+					printf("ERROR: Not enough numberson the line. Exiting program...\n");
+					exit(EXIT_FAILURE);
+				}
+			}
+			//For printing all child pids
+			sprintf(pidString, "%d ", pid);
+			strcat(endString, pidString);
+		}
+		else{   //Child
+			fprintf(ofPtr, "%d ", getpid());
+			counter = 0;
+		
+			cToken = strtok(str, s);
+			cNum = atoi(cToken);
+			
+			fgets(str, 60, ifPtr);
+			
+			cToken = strtok(str, s);
+			
 
-
+			fprintf(ofPtr, "\n");
+			exit(1);
+		}
+	}
+	fprintf(ofPtr, "All children were: %s\n", endString);
+	fprintf(ofPtr, "Parent PID: %d\n", getpid());
+	
 
 	//Don't forget to close your files!
 	fclose(ofPtr);
