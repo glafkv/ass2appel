@@ -5,7 +5,20 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <time.h>
-
+#include <stdbool.h>
+//subset function
+bool isSubsetSum(int set[], int n, int sum){
+	
+	if(sum == 0)
+		return true;
+	if(n == 0 && sum != 0)
+		return false;
+	
+	if(set[n-1] > sum)
+		return isSubsetSum(set, n-1, sum);
+	
+	return isSubsetSum(set, n-1, sum) || isSubsetSum(set, n-1, sum-set[n-1]);
+}
 int main(int argc, char **argv)
 {
 
@@ -17,7 +30,14 @@ int main(int argc, char **argv)
 	//Default values if not given
 	inFile = "input.dat";
 	outFile = "output.dat";
-
+	
+	int set[] = {3, 24, 4, 12, 5, 2};
+	int sum = 9; 
+	int n = sizeof(set) / sizeof(set[0]);
+	if(isSubsetSum(set, n, sum) == true)
+		printf("Found a subset with given sum\n");
+	else
+		printf("No subset with given sum");
 	//getopt statement
 	while((option = getopt(argc, argv, "hi:o:t:")) != -1)
 	{
@@ -77,7 +97,7 @@ int main(int argc, char **argv)
 	fgets(str, 60, ifPtr);
 	
 	token = strtok(str, s);
-	printf("%s\n", token);
+	//printf("%s\n", token);
 	//Converts the first number to an int to be processed by the for loop
 	num = atoi(token);
 	
@@ -89,8 +109,7 @@ int main(int argc, char **argv)
 	int pid, status, childPID, fNum;
 	
 
-	//Here we need to go into a loop that does everything else.
-	//Will need to think about this more tomorrow.
+	
 	//Goes into loop based on the first number grabbed.
 	for(i = 0; i < num; i++){
 		//Gets second line of input.
@@ -102,16 +121,9 @@ int main(int argc, char **argv)
 		}
 		else if(pid != 0){  //parent
 			fgets(str, 60, ifPtr);
-			
+			//suspends execution of the current process until a child specified by pid argument has changed state
 			waitpid(pid, &status, 0);
-			if(WIFEXITED(status)){
-				int es = WEXITSTATUS(status);
-				
-				if(es == 255){
-					printf("ERROR: Not enough numberson the line. Exiting program...\n");
-					exit(EXIT_FAILURE);
-				}
-			}
+			
 			//For printing all child pids
 			sprintf(pidString, "%d ", pid);
 			strcat(endString, pidString);
@@ -126,6 +138,7 @@ int main(int argc, char **argv)
 			fgets(str, 60, ifPtr);
 			
 			cToken = strtok(str, s);
+			//Here is where we'll put the subset code.
 			
 
 			fprintf(ofPtr, "\n");
