@@ -31,13 +31,13 @@ int main(int argc, char **argv)
 	inFile = "input.dat";
 	outFile = "output.dat";
 	
-	int set[] = {3, 24, 4, 12, 5, 2};
+	/*int set[] = {3, 24, 4, 12, 5, 2};
 	int sum = 9; 
 	int n = sizeof(set) / sizeof(set[0]);
 	if(isSubsetSum(set, n, sum) == true)
 		printf("Found a subset with given sum\n");
 	else
-		printf("No subset with given sum");
+		printf("No subset with given sum");*/
 	//getopt statement
 	while((option = getopt(argc, argv, "hi:o:t:")) != -1)
 	{
@@ -86,12 +86,13 @@ int main(int argc, char **argv)
 	char str[60];
 	const char s[2] = " ";
 	char *token;
-	char *cToken;
+	char *sum;
 	int num, cNum;
 	//loop counters
 	int i, j;
 	//Flag for child
 	int counter;
+	int set[100];
 
 	//Gets the first line of the input file
 	fgets(str, 60, ifPtr);
@@ -132,15 +133,32 @@ int main(int argc, char **argv)
 			fprintf(ofPtr, "%d ", getpid());
 			counter = 0;
 		
-			cToken = strtok(str, s);
-			cNum = atoi(cToken);
+			sum = strtok(str, s);
+			cNum = atoi(sum);
 			
+			printf("%s\n", sum);
 			fgets(str, 60, ifPtr);
 			
-			cToken = strtok(str, s);
+			sum = strtok(str, s);
 			//Here is where we'll put the subset code.
+			printf("%s\n", sum);
 			
-
+			/*Need to figure out:
+				How to take in the line, throw it into an array, so we can use it for the subset function.
+				Then print PID and whether or not it's a subset*/	
+			while(counter < cNum){
+				
+				//fscanf(ifPtr, "%d ", &set
+				fNum = atoi(sum);
+			//	set[fNum];
+				//printf("%s \n", sum);
+					
+				counter++;
+				sum = strtok(NULL, s);
+				printf("%s ", sum);
+			//	printf("%d\n", set[fNum]);
+			}
+			///printf("%d\n", set[fNum]);
 			fprintf(ofPtr, "\n");
 			exit(1);
 		}
