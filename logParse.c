@@ -119,13 +119,7 @@ int main(int argc, char **argv)
 		//	fgets(str, 60, ifPtr);
 			//suspends execution of current process until a child specified by pid argument has changed state
 			waitpid(pid, &status, 0);
-			if(WIFEXITED(status)){
-				int es = WEXITSTATUS(status);
-				if(es == 255){
-					printf("Error\n");
-					exit(EXIT_FAILURE);
-				}
-			}
+		
 			//for printing all child pids
 			sprintf(pidString, "%d ", pid);
 			strcat(endString, pidString);
@@ -139,6 +133,13 @@ int main(int argc, char **argv)
 			
 	
 			printf("%s\n", cToken);
+			//this while loop prints all the numbers in the line	
+			while(counter < cNum){
+				fNum = atoi(cToken);
+				printf("%s ", cToken);
+				counter++;
+				cToken = strtok(NULL,s);
+			}
 			/*Keep just in case we need it for the while loop:
  * 			fgets(str, 60, ifPtr);
 			
