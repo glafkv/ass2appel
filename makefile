@@ -1,23 +1,17 @@
-
-THIS DOESNT WORK
-
 CC	= gcc
 CFLAGS	= -g
 TARGET	= logParse
 OBJS	= logParse.o
-LIB	= logParse.c
-$(TARGET):	$(OBJS)
-		$(CC) -o $@ $(TARGET) $(OBJS)
 
-$(OBJS):	$(LIB)
-		$(CC) -g -c $(LIB)
+$(TARGET): $(OBJS)
+	$(CC) -o $(TARGET) $(OBJS)
 
-.c.o:	
-	$(CC) $(CFLAGS) -c $<
+logParse.o: logParse.c
+	$(CC) $(CFLAGS) -c logParse.c
 
 .PHONY: clean
 clean:
-	/bin/rm -f *.o *~ $(LIB) $(TARGET)
+	/bin/rm -f *.o $(TARGET)
 
 
 

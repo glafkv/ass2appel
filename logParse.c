@@ -6,6 +6,9 @@
 #include <sys/stat.h>
 #include <time.h>
 #include <stdbool.h>
+#include <sys/wait.h>
+#include <limits.h>
+
 //subset function
 bool isSubsetSum(int set[], int n, int sum){
 	
@@ -80,7 +83,7 @@ int main(int argc, char **argv)
 	char str[60];
 	const char s[2] = " ";
 	char *token;
-	char *sum;
+	char *cToken;
 	int num, cNum;
 	//loop counters
 	int i, j;
@@ -106,6 +109,7 @@ int main(int argc, char **argv)
 	for(i = 0; i < num; i++){
 		//Gets second line of input
 		fgets(str, 60, ifPtr);
+		//printf("%s\n", str);
 		pid = fork();
 		//if fork fails
 		if(pid < 0){
@@ -115,40 +119,58 @@ int main(int argc, char **argv)
 			fgets(str, 60, ifPtr);
 			//suspends execution of current process until a child specified by pid argument has changed state
 			waitpid(pid, &status, 0);
+			if(WIFEXITED(status)){
+				int es = WEXITSTATUS(status);
+				if(es == 255){
+					printf("Error\n");
+					exit(EXIT_FAILURE);
+				}
+			}
 			//for printing all child pids
 			sprintf(pidString, "%d ", pid);
 			strcat(endString, pidString);
 		}
 		else {	//child
-			//fprintf(ofPtr, "%d ", getpid());
+			fprintf(ofPtr, "%d ", getpid());
 			counter = 0;
 			
-			sum = strtok(str, s);
-			cNum = atoi(sum);
+			cToken = strtok(str, s);
+			cNum = atoi(cToken);
 			
-			printf("%s\n", sum);
+			//printf("%s\n", sum);
+			//printf("%s\n", cNum);
 			fgets(str, 60, ifPtr);
 			
-			sum = strtok(str, s);
+			cToken = strtok(str, s);
 			//here is where we'll put the subset code
-			printf("%s\n", sum);	
-
-			/*Need to figure out how to take in a line, throw it into an array so we can use it for the subset function.*/
+			//printf("%s ", sum);	
 			while(counter < cNum){
+				fNum = atoi(cToken);
+				//push(fNum);
+				printf("%s ", cToken);	
+				counter++;
+				cToken = strtok(NULL,s);
+			}
+		
+				/*Need to figure out how to take in a line, throw it into an array so we can use it for the subset function.*/
+			//while(counter < cNum){
 				//fscanf(ifPtr, "%d ", &set);
-				fNum = atoi(sum);
+			//	fNum = atoi(sum);
 				//set[fNum];
 				//printf("%s \n", sum);
-				counter++;
-				sum = strtok(NULL,s);
-				printf("%s ", sum);
+			//	counter++;
+			//	sum = strtok(NULL,s);
+				//printf("%s ", sum);
 				//printf("%d\n", set[fNum]);
-			}
+			//}
 			//printf("%d\n", set[fNum]);
 			fprintf(ofPtr, "\n");
 			exit(1);
+			
 		}
+		
 	}
+
 	fprintf(ofPtr, "All the children were: %s\n", endString);
 	fprintf(ofPtr, "Parent PID: %d\n", getpid());
 	
