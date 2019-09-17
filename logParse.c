@@ -87,6 +87,7 @@ int main(int argc, char **argv)
 	const char s[2] = " ";
 	char *token;
 	char *cToken;
+	char *pToken;
 	int num, cNum;
 	//loop counters
 	int i, j;
@@ -148,14 +149,40 @@ int main(int argc, char **argv)
 		else {	//child
 			fprintf(ofPtr, "%d ", getpid());
 			counter = 0;
-			
+			//pToken = scanf("%d", &str);
+			//printf("%s\n", pToken);
+			//printf("%s\n", str);
+			//This gets the first number. Stops when it gets to " " 
 			
 			cToken = strtok(str, s);
+			//printf("%s\n", str);	
 			cNum = atoi(cToken);
 			
 			//fgets(str, 60, ifPtr);
 			//printf("the line is: %s\n", cToken);
-			printf("%d\n", cNum);
+			printf("%d \n", cNum);
+			//while(counter < cNum){
+			//	fNum = atoi(cToken);
+			//	printf("%d ", fNum);
+			//	counter++;
+			//	cToken = strtok(NULL, s);
+			//}
+			//	printf("%s ", cToken);
+			//printf("\n");
+			
+			//THIS IS HUGE
+			//TAKES IN THE REMAINDER OF THE STRING AND PUTS INTO AN ARRAY THEN PRINTS ARRAY
+			printf("Array: ");
+			while(cToken = strtok(NULL, s)){
+				set[n] = atoi(cToken);
+				
+				//set[n];
+				//n++;
+				printf("%d ", set[n]);
+			}
+			printf("\n");
+			
+			//printf(" %s\n", str);
 			//while(fgets(str, 60, ifPtr) != NULL){
 			//	printf("the line is: %s\n", cToken);
 			//}
