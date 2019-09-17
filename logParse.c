@@ -31,6 +31,9 @@ int main(int argc, char **argv)
 	inFile = "input.dat";
 	outFile = "output.dat";
 	
+
+	//Literally all I have to do is figure out how to put the numbers into an array
+
 	/*int set[] = {3,24,4,12,5,2};
  * 	int sum = 9;
  * 	int n = sizeof(set) / sizeof(set[0]);
@@ -90,6 +93,8 @@ int main(int argc, char **argv)
 	//Flag for child
 	int counter;
 	int set[100];
+	int k = 0;
+	int n;
 	
 	//gets the first line of the input file
 	fgets(str, 60, ifPtr);
@@ -109,6 +114,22 @@ int main(int argc, char **argv)
 	for(i = 0; i < num; i++){
 		//Gets second line of input
 		fgets(str, 60, ifPtr);
+		/*cToken = strtok(str, s);
+		cNum = atoi(cToken);
+		printf("%d\n", cNum);
+		while(fgets(str, 60, ifPtr) != NULL){
+			printf("the line is: %s\n", cToken);
+		
+		}*/
+		//printf("First num: %d\n", str[1]);
+		
+		/*for(k = 0; k < strlen(str); k++){
+			set[k];
+			printf("Array: %d\n", set[k]);
+		}*/
+		//This will print the whole line. 
+		//Need to figure out how to take this line and put it into an array.
+
 		//printf("%s\n", str);
 		pid = fork();
 		//if fork fails
@@ -128,18 +149,49 @@ int main(int argc, char **argv)
 			fprintf(ofPtr, "%d ", getpid());
 			counter = 0;
 			
+			
 			cToken = strtok(str, s);
 			cNum = atoi(cToken);
 			
-	
-			printf("%s\n", cToken);
-			//this while loop prints all the numbers in the line	
-			while(counter < cNum){
+			//fgets(str, 60, ifPtr);
+			//printf("the line is: %s\n", cToken);
+			printf("%d\n", cNum);
+			//while(fgets(str, 60, ifPtr) != NULL){
+			//	printf("the line is: %s\n", cToken);
+			//}
+			/*printf("%d\n", cNum);
+			while(fgets(str, 60, ifPtr) != '\0'){
+				set[i] = n;
+				i++;
+			}
+		
+			for(i = 0; i < n; ++i){
+				printf(" %s\n", set[i]);
+			}*/
+			//printf("%s\n", cToken);
+			/*while(fgets(*set[i], 60, ifPtr)){
+				set[i] = '\0';
+				i++;
+			}
+			n = i;
+			for(i = 0; i < n; ++i){
+				printf(" %s\n", set[i]);
+			}
+			printf("\n");*/
+			//this while loop prints all the numbers in the line
+			/*while(fscanf(ifPtr, "%d", &n) > 0){
+				set[k] = n;
+				k++;
+				printf("%d ", n);
+			}
+			printf("\n");*/
+			//printf("%d\n", n);	
+			/*while(counter < cNum){
 				fNum = atoi(cToken);
 				printf("%s ", cToken);
 				counter++;
 				cToken = strtok(NULL,s);
-			}
+			}*/
 			/*Keep just in case we need it for the while loop:
  * 			fgets(str, 60, ifPtr);
 			
