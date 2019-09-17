@@ -116,7 +116,7 @@ int main(int argc, char **argv)
 			perror("logParse.c: Error: ");
 		}
 		else if(pid != 0){	//parent
-			fgets(str, 60, ifPtr);
+		//	fgets(str, 60, ifPtr);
 			//suspends execution of current process until a child specified by pid argument has changed state
 			waitpid(pid, &status, 0);
 			if(WIFEXITED(status)){
@@ -137,20 +137,14 @@ int main(int argc, char **argv)
 			cToken = strtok(str, s);
 			cNum = atoi(cToken);
 			
-			//printf("%s\n", sum);
-			//printf("%s\n", cNum);
-			fgets(str, 60, ifPtr);
+	
+			printf("%s\n", cToken);
+			/*Keep just in case we need it for the while loop:
+ * 			fgets(str, 60, ifPtr);
 			
-			cToken = strtok(str, s);
+			cToken = strtok(str, s);*/
 			//here is where we'll put the subset code
-			//printf("%s ", sum);	
-			while(counter < cNum){
-				fNum = atoi(cToken);
-				//push(fNum);
-				printf("%s ", cToken);	
-				counter++;
-				cToken = strtok(NULL,s);
-			}
+	
 		
 				/*Need to figure out how to take in a line, throw it into an array so we can use it for the subset function.*/
 			//while(counter < cNum){
