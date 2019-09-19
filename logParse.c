@@ -10,7 +10,7 @@
 #include <limits.h>
 
 //subset function
-bool isSubsetSum(int set[], int n, int sum){
+/*bool isSubsetSum(int set[], int n, int sum){
 	
 	if(sum == 0)
 		return true;
@@ -21,7 +21,29 @@ bool isSubsetSum(int set[], int n, int sum){
 		return isSubsetSum(set, n-1, sum);
 	
 	return isSubsetSum(set, n-1, sum) || isSubsetSum(set, n-1, sum-set[n-1]);
-}
+}*/
+//Need to figure out how to implement a vector in c
+//figure out how to measure the length of a vector
+/*void print(int arr[], int n, vector<int> v, int sum){
+	if(sum == 0){
+		for(int i = 0; i < 9; i++)
+			printf("%d ", v[i]);
+		printf("\n");
+	}
+	if(n == 0)
+		return;
+	
+	print(arr, n-1, v, sum);
+}*/
+//Doesn't work
+/*void subset(int arr[], int l, int r, int sum){
+	if(l > r){
+		printf("%d ", sum);
+		return;
+	}
+	subset(arr, l+1, r, sum+arr[l]);
+	subset(arr, l+1, r, sum);
+}*/
 
 int main(int argc, char **argv)
 {
@@ -35,10 +57,11 @@ int main(int argc, char **argv)
 
 	//Literally all I have to do is figure out how to put the numbers into an array
 
-	/*int arr[] = {3,24,4,12,5,2};
+	int arr[] = {3,24,4,12,5,2};
   	int sum = 9;
   	int o = sizeof(arr) / sizeof(arr[0]);
-  	if(isSubsetSum(arr,o,sum) == true)
+  	subset(arr, 0, o-1, sum);
+	/*if(isSubsetSum(arr,o,sum) == true)
   		printf("Found a subset with given sum\n");
   	else
   		printf("No subset with given sum");
