@@ -13,3 +13,6 @@ How to Run:
 	./logParse -o <outputfile>	//To specify the output file that we're sending it to. The default is "output.dat"
 	./logParse -t <n>		//To specify the maximum duration the code should run. The default is 10 seconds.	
 	make clean			//To erase all the object and executable files.
+
+Problems:
+	I was able to get the subset sum functions working with a built in array, but when I tried to put it in the child and grab numbers from the file, it would stall. So all this really does is print out the PIDs for everything. I couldn't figure out how to finish this. Oh and I didn't get to the timer part. 

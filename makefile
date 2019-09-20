@@ -6,12 +6,12 @@ OBJS	= logParse.o
 $(TARGET): $(OBJS)
 	$(CC) -o $(TARGET) $(OBJS)
 
-logParse.o: logParse.c
+logParse.o: logParse.c vector.h
 	$(CC) $(CFLAGS) -c logParse.c
 
 .PHONY: clean
 clean:
-	/bin/rm -f *.o $(TARGET)
+	/bin/rm -f output.dat *.o $(TARGET)
 
 
 
